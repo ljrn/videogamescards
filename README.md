@@ -25,8 +25,8 @@ L'application que vous développerez suivra l'arborescence suivante :
 ```
 Accueil (Liste des jeux) (url "/")
     ├─ Détail jeu (url "/detail-:slug")
-	├─ Mes favoris (url "/mes-favoris")
-	└─ L'équipe (url "/lequipe.fr")
+    ├─ Mes favoris (url "/mes-favoris")
+    └─ L'équipe (url "/lequipe.fr")
 ```
 
 > _**NB :** pour la page de détail d'un jeu, notez que l'URL est en fait un "motif" où **`":slug"`** correspond au nom du jeu vidéo qu'on veut consulter._
