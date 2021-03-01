@@ -21,6 +21,6 @@ games.innerHTML += new GameThumbnail({
 }).render();*/
 const gameList = new GameList([]);
 Router.titleElement = document.querySelector('.pageTitle');
-Router.contentElement = document.querySelector('.games');
+Router.contentElement = document.querySelector('.page');
 Router.routes = [{ path: '/', page: gameList, title: 'Jeux' }];
 Router.navigate('/');
