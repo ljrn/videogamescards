@@ -1,0 +1,14 @@
+.gameThumbnail {
+	width: 30%;
+	display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+
+}      
+
+.gamelist {
+	display: flex;
+	flex-direction: row;
+    flex-wrap: wrap;
+
+}

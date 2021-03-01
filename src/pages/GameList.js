@@ -11,8 +11,19 @@ export default class GameList extends Page {
 	}
 
 	set games(value) {
+		console.log(value);
 		this.#games = value;
-		this.children = this.#games.map(game => new GameThumbnail(game));
+		if (this.#games.results) {
+			this.children = this.#games.results.map(
+				game =>
+					new GameThumbnail({
+						name: game.name,
+						background_image: game.background_image,
+						released: game.released,
+						metacritic: game.metacritic,
+					})
+			);
+		}
 	}
 
 	incPageNum() {
@@ -24,11 +35,16 @@ export default class GameList extends Page {
 
 	mount(element) {
 		super.mount(element);
-		fetch(`http://api.rawg.io/api/games?page=${this.page_num}`)
+		fetch(`https://api.rawg.io/api/games?page=${this.page_num}`)
 			.then(response => response.json())
 			.then(responseJSON => {
-				this.game = responseJSON;
+				console.log(responseJSON);
+				this.games = responseJSON;
+				console.log(this.element);
 				this.element.innerHTML = this.render();
+			})
+			.catch(error => {
+				console.error(error);
 			});
 	}
 }
