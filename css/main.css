@@ -20,4 +20,9 @@ main {
     width: 100%;
     text-align: center;
 }
-      
+
+.gameThumbnail {
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+}      
