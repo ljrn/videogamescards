@@ -13,14 +13,6 @@ main {
     flex: 1 0 auto;
 }
 
-.page-footer{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-}
-
 .gameThumbnail {
 	width: 30%;
 	display: flex;
