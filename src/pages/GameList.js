@@ -5,59 +5,56 @@ import Router from '../Router';
 
 export default class GameList extends Page {
 	#games;
-	static page_num;
+	page_num;
+	rendered;
 	constructor(games) {
 		super('gameList');
 		this.games = games;
 		this.page_num = 1;
+		this.rendered = [];
 		document.onscroll = this.loadMore;
 	}
 
 	set games(value) {
-		console.log(value);
-		this.#games = value;
-		if (this.#games.results) {
-			this.children = this.#games.results.map(game => new GameThumbnail(game));
+		this.#games = value.results;
+		if (this.#games) {
+			if (this.children instanceof Array)
+				this.#games.map(game => this.children.push(new GameThumbnail(game)));
+			else this.children = this.#games.map(game => new GameThumbnail(game));
 		}
 	}
 
-	incPageNum() {
-		this.page_num += 1;
-	}
-	decPageNum() {
-		this.page_num -= 1;
-	}
+	loadGames() {}
 
 	loadMore() {
 		if (
 			document.documentElement.scrollTop + window.innerHeight ==
-			document.documentElement.scrollHeight - 500
+			document.documentElement.scrollHeight
 		) {
-			document.documentElement.style.overflow = 'hidden';
 			document.documentElement.scrollTop =
-				document.documentElement.scrollTop - 2500;
-			Router.navigate('/');
+				document.documentElement.scrollTop - 50;
+			Router.append('/');
 		}
 	}
 
 	mount(element) {
-		console.log(this.page_num);
-		super.mount(element);
-		this.element.innerHTML += new Loader().render();
-		fetch(`https://api.rawg.io/api/games?page=${this.page_num}`)
-			.then(response => response.json())
-			.then(responseJSON => {
-				console.log(responseJSON);
-				this.games = responseJSON;
-				console.log(this.element);
-				if (this.page_num == 1) this.element.innerHTML = this.render();
-				else this.element.innerHTML += this.render();
+		if (!this.rendered.includes(this.page_num)) {
+			this.rendered.push(this.page_num);
+			super.mount(element);
+			this.element.innerHTML += new Loader().render();
+			fetch(`https://api.rawg.io/api/games?page=${this.page_num}`)
+				.then(response => response.json())
+				.then(responseJSON => {
+					console.log(this.page_num);
+					this.games = responseJSON;
+					console.log();
+					this.element.innerHTML = this.render();
 
-				this.page_num++;
-			})
-			.then((document.documentElement.style.overflow = ''))
-			.catch(error => {
-				console.error(error);
-			});
+					this.page_num++;
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		}
 	}
 }

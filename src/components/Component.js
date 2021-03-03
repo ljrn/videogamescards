@@ -21,7 +21,13 @@ export default class Component {
 
 	renderAttributes() {
 		if (this.attribute) {
-			return `${this.attribute.name}="${this.attribute.value}"`;
+			if (this.attribute instanceof Array) {
+				let res = '';
+				this.attribute.forEach(attrib => {
+					res += `${attrib.name}="${attrib.value}" `;
+				});
+				return res;
+			} else return `${this.attribute.name}="${this.attribute.value}"`;
 		}
 		return '';
 	}
@@ -35,5 +41,9 @@ export default class Component {
 			);
 		}
 		return this.children || '';
+	}
+
+	append(children) {
+		this.children.append(children);
 	}
 }
