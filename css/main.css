@@ -22,6 +22,19 @@ body {
 }
 
 .card-content{
-    height: 50%;
+    height: 100%;
+    width: 100%;
+}
+
+.sidenav{
+    transform: translateX(0) !important;
+}
+
+.pageTitle{
+    text-align: center;
+}
+
+#search{
+    text-indent: 17%;
 }
 

@@ -1,6 +1,8 @@
 import GameThumbnail from './components/GameThumbnail';
 import GameList from './pages/GameList';
 import Router from './Router.js';
+import Filters from './Filters';
+import FilteredGameList from './pages/FilteredGameList';
 
 const games = document.querySelector('.games');
 /*
@@ -19,9 +21,31 @@ games.innerHTML += new GameThumbnail({
 	released: '2019-09-17T03:06:45',
 	metacritic: '97',
 }).render();*/
-const gameList = new GameList([]);
+Filters.addFilter('search', localStorage.getItem('search'));
+
+const gameList = new GameList();
+const searchList = new FilteredGameList();
 Router.titleElement = document.querySelector('.pageTitle');
 Router.contentElement = document.querySelector('.page');
-Router.routes = [{ path: '/', page: gameList, title: 'Jeux' }];
-Router.navigate('/');
-document.onscroll = gameList.loadMore;
+Router.routes = [
+	{ path: '/', page: gameList, title: 'Jeux' },
+	{ path: '/search', page: searchList, title: 'Recherche' },
+	{ path: '/favoris', page: searchList, title: 'Recherche' },
+];
+//Router.navigate('/');
+// E.3. Deeplinking
+// détection des boutons précédent/suivant du navigateur :
+// on lit l'url courante dans la barre d'adresse et on l'envoie au Router
+window.onpopstate = () => Router.navigate(document.location.pathname, false);
+// affichage de la page initiale :
+// même traitement que lors de l'appui sur les boutons précédent/suivant
+window.onpopstate();
+
+const form = document.querySelector('form');
+
+form.addEventListener('submit', e => {
+	e.preventDefault();
+	Filters.addFilter(form.search.id, form.search.value);
+	localStorage.setItem('search', form.search.value);
+	Router.navigate('/search');
+});
