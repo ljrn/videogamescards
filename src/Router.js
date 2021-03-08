@@ -9,6 +9,7 @@ export default class Router {
 	}
 
 	static navigate(path, pushState = true) {
+		console.log(this.routes);
 		const route = this.routes.find(route => route.path === path);
 		if (route) {
 			this.titleElement.innerHTML = `<h1>${route.title}</h1>`;
