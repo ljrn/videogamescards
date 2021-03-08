@@ -60,7 +60,7 @@ form.addEventListener('submit', e => {
 	e.preventDefault();
 	Filters.addFilter(form.search.id, form.search.value);
 	localStorage.setItem('search', form.search.value);
-	Router.navigate('/search');
+	Router.changePage('/', searchList);
 });
 
 const ordering = document.querySelector('#ordering');
@@ -69,7 +69,7 @@ ordering.addEventListener('change', e => {
 	e.preventDefault();
 	Filters.addFilter(ordering.id, ordering.value);
 	console.log(Filters.filters);
-	Router.navigate('/search');
+	Router.changePage('/', searchList);
 });
 
 const genres = document.querySelector('#genres');
@@ -78,5 +78,5 @@ genres.addEventListener('change', e => {
 	e.preventDefault();
 	Filters.addFilter(genres.id, genres.value);
 	console.log(Filters.filters);
-	Router.navigate('/search');
+	Router.changePage('/', searchList);
 });

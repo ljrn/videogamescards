@@ -20,8 +20,7 @@ export default class Router {
 		const filterBox = this.#menuElement.querySelector('.filters');
 
 		if (route) {
-			if (route.path === '/' || route.path === '/search')
-				filterBox.hidden = false;
+			if (route.path === '/') filterBox.hidden = false;
 			else filterBox.hidden = true;
 			this.titleElement.innerHTML = `<h1>${route.title}</h1>`;
 			this.contentElement.innerHTML = route.page.render();
@@ -41,6 +40,6 @@ export default class Router {
 	static changePage(path, page) {
 		const route = this.routes.find(route => route.path === path);
 		route.page = page;
-		this.navigate(route);
+		this.navigate(path);
 	}
 }
