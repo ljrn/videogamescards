@@ -36,7 +36,7 @@ Router.contentElement = document.querySelector('.page');
 Router.routes = [
 	{ path: '/', page: gameList, title: 'Jeux' },
 	{ path: '/search', page: searchList, title: 'Recherche' },
-	{ path: '/favoris', page: favorisList, title: 'Favoris' },
+	{ path: '/mes-favoris', page: favorisList, title: 'Favoris' },
 ];
 //Router.navigate('/');
 // E.3. Deeplinking
