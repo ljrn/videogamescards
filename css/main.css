@@ -38,3 +38,11 @@ body {
     text-indent: 17%;
 }
 
+.centered{
+    text-align: center;
+}
+
+select{
+    display: block !important;
+}
+

@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>GameBoard</title>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/gameList.css">
-	<link rel="icon" href="images/icon.png" sizes="96x96">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	
-	<script src="build/main.bundle.js" defer></script>
-</head>
-<body>
-	<header>
-	
-
-	</header>
-		
-		  <div class='container'>
-
-			<div class='row'>
-				<div class='col s1'>
-
-					<ul id="slide-out" class="sidenav grey darken-4 ">
-						
-						<section class='pageTitle white-text '>
-							<h5>Jeux</h5>
-						</section>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>GameBoard</title>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="css/main.css">
+      <link rel="stylesheet" href="css/gameList.css">
+      <link rel="icon" href="images/icon.png" sizes="96x96">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="build/main.bundle.js" defer></script>
+   </head>
+   <body>
+      <header>
+      </header>
+      <div class='container'>
+         <div class='row'>
+            <div class='col s1'>
+               <ul id="slide-out" class="sidenav grey darken-4 ">
+                  <section class='pageTitle white-text '>
+                     <h5>Jeux</h5>
+                  </section>
+                  </li>
+                  <li>
+                     <form>
+                        <div class="input-field ">
+                           <input id="search" type="search" required>
+                           <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                           <i class="material-icons">close</i>
+                        </div>
+                     </form>
+                  </li>
+                  <li ><a class='grey-text' href="/">Jeux</a></li>
+                  <li><a class='grey-text' href="/mes-favoris">Favoris</a></li>
+				  <li><a class='grey-text' href="/lequipe">Equipe</a></li>
+				  <hr>
+				  <div class='filters'>
+				  <li class='grey-text centered'><h6>Filtres</h6></li>
+				  <label for="ordering">Trier par :</label>
+				  	<li><select name="ordering" id='ordering'>
+						  <option value='' >Pertinence</option>
+						  <option value='-metacritic'>Meilleure note</option>
+						  <option value='-released'>Dernières sorties</option>
+						</select>
 					</li>
-					<li><form>
-						<div class="input-field ">
-							<input id="search" type="search" required>
-							<label class="label-icon" for="search"><i class="material-icons">search</i></label>
-							<i class="material-icons">close</i>
-						</div>
-					</form>
-				</li>
-				<li ><a class='grey-text' href="/">Jeux</a></li>
-				<li><a class='grey-text' href="/mes-favoris">Favoris</a></li>
-				<li><a class='grey-text' href="/lequipe">Equipe</a></li>
-			 	 </ul>
 				</div>
-
-				<div class='page col s12 offset-s2'>
-				</div>
-
-			</div>
-		</div>
-     
-</body>
+               </ul>
+            </div>
+            <div class='page col s12 offset-s2'></div>
+         </div>
+      </div>
+   </body>
 </html>

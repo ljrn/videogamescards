@@ -26,7 +26,7 @@ games.innerHTML += new GameThumbnail({
 if (localStorage.getItem('favoris')) {
 	Favoris.setFavoris(JSON.parse(localStorage.getItem('favoris')));
 }
-Filters.addFilter('search', localStorage.getItem('search'));
+//Filters.addFilter('search', localStorage.getItem('search'));
 
 const gameList = new GameList();
 const searchList = new FilteredGameList();
@@ -35,7 +35,7 @@ Router.titleElement = document.querySelector('.pageTitle');
 Router.contentElement = document.querySelector('.page');
 Router.routes = [
 	{ path: '/', page: gameList, title: 'Jeux' },
-	{ path: '/search', page: searchList, title: 'Recherche' },
+	{ path: '/search', page: searchList, title: 'Filtrer' },
 	{ path: '/mes-favoris', page: favorisList, title: 'Favoris' },
 ];
 //Router.navigate('/');
@@ -53,5 +53,15 @@ form.addEventListener('submit', e => {
 	e.preventDefault();
 	Filters.addFilter(form.search.id, form.search.value);
 	localStorage.setItem('search', form.search.value);
+	Router.navigate('/search');
+});
+
+const ordering = document.querySelector('#ordering');
+console.log(ordering);
+
+ordering.addEventListener('change', e => {
+	e.preventDefault();
+	Filters.addFilter(ordering.id, ordering.value);
+	console.log(Filters.filters);
 	Router.navigate('/search');
 });
