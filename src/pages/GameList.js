@@ -2,6 +2,7 @@ import Page from './Page';
 import GameThumbnail from '../components/GameThumbnail';
 import Loader from '../components/Loader';
 import Router from '../Router';
+import Favoris from '../Favoris';
 
 export default class GameList extends Page {
 	#games;
@@ -61,6 +62,7 @@ export default class GameList extends Page {
 				this.games = responseJSON;
 				console.log();
 				this.element.innerHTML = this.render();
+				this.addFavorites(this.element);
 			})
 			.catch(error => {
 				console.error(error);
@@ -79,5 +81,14 @@ export default class GameList extends Page {
 			this.element.innerHTML += new Loader().render();
 			this.getGames();
 		}
+	}
+	addFavorites(elt) {
+		elt.querySelectorAll('.gameThumbnail').forEach(element => {
+			element.querySelector('.favbutton').addEventListener('click', e => {
+				e.preventDefault();
+				Favoris.addFavoris(element);
+				console.log(Favoris.getFavoris());
+			});
+		});
 	}
 }
