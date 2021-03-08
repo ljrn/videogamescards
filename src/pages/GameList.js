@@ -63,6 +63,7 @@ export default class GameList extends Page {
 				console.log();
 				this.element.innerHTML = this.render();
 				this.addFavorites(this.element);
+				this.redirectDetails(this.element);
 			})
 			.catch(error => {
 				console.error(error);
@@ -91,6 +92,13 @@ export default class GameList extends Page {
 					if (game.name == name.innerHTML) Favoris.addFavoris(game);
 				});
 				console.log(Favoris.getFavoris());
+			});
+		});
+	}
+	redirectDetails(elt) {
+		elt.querySelectorAll('.gameThumbnail').forEach(element => {
+			element.querySelector('.card-content').addEventListener('click', e => {
+				Router.navigate(`/detail-${elt.getAttribute('id')}`);
 			});
 		});
 	}

@@ -11,6 +11,7 @@ export default class Favoris {
 			metacritic: game.metacritic,
 			parent_platforms: game.parent_platforms,
 			id: game.id,
+			slug: game.slug,
 		});
 		localStorage.setItem('favoris', JSON.stringify(this.favoris));
 	}

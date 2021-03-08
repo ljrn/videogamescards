@@ -10,6 +10,7 @@ export default class GameThumbnail extends Component {
 		metacritic,
 		parent_platforms,
 		id,
+		slug,
 	}) {
 		parent_platforms = parent_platforms.map(
 			plat => new PlatformImg(plat.platform.name)
@@ -24,7 +25,7 @@ export default class GameThumbnail extends Component {
 			'div',
 			[
 				{ name: 'class', value: 'card gameThumbnail' },
-				{ name: 'id', value: `${id}` },
+				{ name: 'id', value: `${slug}` },
 			],
 			[
 				new Component(
