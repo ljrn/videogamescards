@@ -18,7 +18,7 @@
       <div class='container'>
          <div class='row'>
             <div class='col s1'>
-               <ul id="slide-out" class="sidenav grey darken-4 ">
+               <ul id="slide-out" class="sidenav grey darken-4 menu">
                   <section class='pageTitle white-text '>
                      <h5>Jeux</h5>
                   </section>
@@ -36,13 +36,21 @@
                   <li><a class='grey-text' href="/mes-favoris">Favoris</a></li>
 				  <li><a class='grey-text' href="/lequipe">Equipe</a></li>
 				  <hr>
-				  <div class='filters'>
+				  <div class='filters' hidden>
 				  <li class='grey-text centered'><h6>Filtres</h6></li>
-				  <label for="ordering">Trier par :</label>
+				  <label for="ordering"><h6>Trier par :</h6></label>
 				  	<li><select name="ordering" id='ordering'>
 						  <option value='' >Pertinence</option>
 						  <option value='-metacritic'>Meilleure note</option>
 						  <option value='-released'>Dernières sorties</option>
+						</select>
+					</li>
+
+					<label for="genres"><h6>Genre :</h6></label>
+				  	<li><select name="genres" id='genres'>
+						  <option value='' >All</option>
+						  <option value='action'>Action</option>
+						  <option value='indie'>Indés</option>
 						</select>
 					</li>
 				</div>

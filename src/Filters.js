@@ -15,7 +15,7 @@ export default class Filters {
 	static toString() {
 		let string = '';
 		this.filters.forEach(filter => {
-			string += `&${filter.name}=${filter.value}`;
+			if (filter.value) string += `&${filter.name}=${filter.value}`;
 		});
 		return string;
 	}

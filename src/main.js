@@ -33,6 +33,7 @@ const searchList = new FilteredGameList();
 const favorisList = new Favorites();
 Router.titleElement = document.querySelector('.pageTitle');
 Router.contentElement = document.querySelector('.page');
+Router.menuElement = document.querySelector('.menu');
 Router.routes = [
 	{ path: '/', page: gameList, title: 'Jeux' },
 	{ path: '/search', page: searchList, title: 'Filtrer' },
@@ -57,11 +58,19 @@ form.addEventListener('submit', e => {
 });
 
 const ordering = document.querySelector('#ordering');
-console.log(ordering);
 
 ordering.addEventListener('change', e => {
 	e.preventDefault();
 	Filters.addFilter(ordering.id, ordering.value);
+	console.log(Filters.filters);
+	Router.navigate('/search');
+});
+
+const genres = document.querySelector('#genres');
+
+genres.addEventListener('change', e => {
+	e.preventDefault();
+	Filters.addFilter(genres.id, genres.value);
 	console.log(Filters.filters);
 	Router.navigate('/search');
 });

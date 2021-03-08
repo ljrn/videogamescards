@@ -46,3 +46,7 @@ select{
     display: block !important;
 }
 
+input[type="search"]:not(.browser-default){
+    color: white ;
+}
+
