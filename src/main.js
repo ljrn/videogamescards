@@ -5,6 +5,7 @@ import Filters from './Filters';
 import FilteredGameList from './pages/FilteredGameList';
 import Favorites from './pages/Favorites';
 import Favoris from './Favoris';
+import GameDetails from './pages/GameDetails';
 
 const games = document.querySelector('.games');
 /*
@@ -31,6 +32,7 @@ if (localStorage.getItem('favoris')) {
 const gameList = new GameList();
 const searchList = new FilteredGameList();
 const favorisList = new Favorites();
+
 Router.titleElement = document.querySelector('.pageTitle');
 Router.contentElement = document.querySelector('.page');
 Router.menuElement = document.querySelector('.menu');

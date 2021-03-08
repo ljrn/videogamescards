@@ -3,6 +3,7 @@ import GameThumbnail from '../components/GameThumbnail';
 import Loader from '../components/Loader';
 import Router from '../Router';
 import Favoris from '../Favoris';
+import GameDetails from './GameDetails';
 
 export default class GameList extends Page {
 	#games;
@@ -58,9 +59,7 @@ export default class GameList extends Page {
 				else throw new Error(`Fetch error: ${response.status}`);
 			})
 			.then(responseJSON => {
-				console.log(this.page_num);
 				this.games = responseJSON;
-				console.log();
 				this.element.innerHTML = this.render();
 				this.addFavorites(this.element);
 				this.redirectDetails(this.element);
@@ -75,7 +74,6 @@ export default class GameList extends Page {
 	}
 
 	mount(element) {
-		console.log(this);
 		if (!this.rendered.includes(this.page_num)) {
 			this.rendered.push(this.page_num);
 			super.mount(element);
@@ -91,14 +89,21 @@ export default class GameList extends Page {
 				this.#games.forEach(game => {
 					if (game.name == name.innerHTML) Favoris.addFavoris(game);
 				});
-				console.log(Favoris.getFavoris());
 			});
 		});
 	}
 	redirectDetails(elt) {
 		elt.querySelectorAll('.gameThumbnail').forEach(element => {
 			element.querySelector('.card-content').addEventListener('click', e => {
-				Router.navigate(`/detail-${elt.getAttribute('id')}`);
+				document.onscroll = null;
+				console.log(element.getAttribute('id'));
+				const gameDetails = new GameDetails(element.getAttribute('id'));
+				Router.routes.push({
+					path: `/detail-${element.getAttribute('id')}`,
+					page: gameDetails,
+					title: 'Details',
+				});
+				Router.navigate(`/detail-${element.getAttribute('id')}`);
 			});
 		});
 	}
