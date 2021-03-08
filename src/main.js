@@ -3,6 +3,8 @@ import GameList from './pages/GameList';
 import Router from './Router.js';
 import Filters from './Filters';
 import FilteredGameList from './pages/FilteredGameList';
+import Favorites from './pages/Favorites';
+import Favoris from './Favoris';
 
 const games = document.querySelector('.games');
 /*
@@ -21,16 +23,20 @@ games.innerHTML += new GameThumbnail({
 	released: '2019-09-17T03:06:45',
 	metacritic: '97',
 }).render();*/
+if (localStorage.getItem('favoris')) {
+	Favoris.setFavoris(JSON.parse(localStorage.getItem('favoris')));
+}
 Filters.addFilter('search', localStorage.getItem('search'));
 
 const gameList = new GameList();
 const searchList = new FilteredGameList();
+const favorisList = new Favorites();
 Router.titleElement = document.querySelector('.pageTitle');
 Router.contentElement = document.querySelector('.page');
 Router.routes = [
 	{ path: '/', page: gameList, title: 'Jeux' },
 	{ path: '/search', page: searchList, title: 'Recherche' },
-	{ path: '/favoris', page: searchList, title: 'Recherche' },
+	{ path: '/favoris', page: favorisList, title: 'Favoris' },
 ];
 //Router.navigate('/');
 // E.3. Deeplinking

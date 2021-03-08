@@ -5,6 +5,7 @@ export default class Favoris {
 
 	static addFavoris(game) {
 		this.favoris.push(game);
+		localStorage.setItem('favoris', JSON.stringify(this.favoris));
 	}
 
 	static getFavoris() {

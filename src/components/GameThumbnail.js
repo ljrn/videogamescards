@@ -2,9 +2,6 @@ import Component from './Component.js';
 import Img from './Img';
 import PlatformImg from './PlatformImg';
 
-function addListener() {
-	console.log('bite');
-}
 export default class GameThumbnail extends Component {
 	constructor({
 		name,
@@ -14,11 +11,6 @@ export default class GameThumbnail extends Component {
 		parent_platforms,
 		id,
 	}) {
-		let color;
-		if (metacritic > 66) color = 'green';
-		else if (metacritic > 33 && metacritic < 66) color = 'orange';
-		else color = 'orange';
-
 		parent_platforms = parent_platforms.map(
 			plat => new PlatformImg(plat.platform.name)
 		);

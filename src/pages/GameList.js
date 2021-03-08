@@ -86,7 +86,10 @@ export default class GameList extends Page {
 		elt.querySelectorAll('.gameThumbnail').forEach(element => {
 			element.querySelector('.favbutton').addEventListener('click', e => {
 				e.preventDefault();
-				Favoris.addFavoris(element);
+				const name = element.querySelector('h4');
+				this.#games.forEach(game => {
+					if (game.name == name.innerHTML) Favoris.addFavoris(game);
+				});
 				console.log(Favoris.getFavoris());
 			});
 		});
