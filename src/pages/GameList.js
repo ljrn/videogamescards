@@ -43,7 +43,7 @@ export default class GameList extends Page {
 			document.documentElement.scrollHeight
 		) {
 			document.documentElement.scrollTop =
-				document.documentElement.scrollTop - 50;
+				document.documentElement.scrollTop - 5;
 			Router.append('/');
 		}
 	}

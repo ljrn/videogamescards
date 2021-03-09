@@ -12,6 +12,10 @@ export default class Filters {
 		this.filters = [];
 	}
 
+	static resetSearch() {
+		this.filters = this.filters.filter(f => f.name != 'search');
+	}
+
 	static toString() {
 		let string = '';
 		this.filters.forEach(filter => {

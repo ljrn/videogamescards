@@ -3,7 +3,6 @@ import Filters from '../Filters';
 
 export default class FilteredGameList extends GameList {
 	constructor() {
-		document.onscroll = null;
 		super();
 	}
 
@@ -12,13 +11,13 @@ export default class FilteredGameList extends GameList {
 	}
 
 	getGames() {
-		document.onscroll = null;
-		this.resetPage();
 		console.log('filtered ' + Filters.toString());
 		console.log(Filters.filters);
 		//this.resetPage();
 		fetch(
-			`https://api.rawg.io/api/games?metacritic=50,100&dates=2020,${new Date().getUTCFullYear()}
+			`https://api.rawg.io/api/games?metacritic=50,100&dates=2020,${new Date().getUTCFullYear()}&page=${
+				this.page_num
+			}
 			${Filters.toString()}`
 		)
 			.then(response => {
@@ -27,9 +26,11 @@ export default class FilteredGameList extends GameList {
 			})
 			.then(responseJSON => {
 				console.log(this.page_num);
-				super.games = responseJSON;
+				this.games = responseJSON;
 				console.log();
 				this.element.innerHTML = this.render();
+				this.addFavorites(this.element);
+				this.redirectDetails(this.element);
 			})
 			.catch(error => {
 				console.error(error);

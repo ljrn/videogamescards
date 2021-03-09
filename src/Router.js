@@ -1,3 +1,6 @@
+import Filters from './Filters';
+import GameList from './pages/GameList';
+
 export default class Router {
 	static titleElement;
 	static contentElement;
@@ -7,11 +10,23 @@ export default class Router {
 		this.#menuElement = element;
 		const links = element.querySelectorAll('a');
 		links.forEach(link => link.addEventListener('click', this.handleMenuClick));
+		const searchCancel = element.querySelector('#close');
+		searchCancel.addEventListener('click', this.handleCancelSearch);
 	}
 
 	static handleMenuClick = event => {
 		event.preventDefault();
-		this.navigate(event.target.getAttribute('href'));
+		if (event.target.getAttribute('id') === 'reset') {
+			Filters.resetFilters();
+			this.changePage('/', new GameList());
+		} else this.navigate(event.target.getAttribute('href'));
+	};
+
+	static handleCancelSearch = event => {
+		event.preventDefault();
+		Filters.resetSearch();
+		this.#menuElement.querySelector('#search').value = '';
+		this.changePage('/', new GameList());
 	};
 
 	static navigate(path, pushState = true) {
