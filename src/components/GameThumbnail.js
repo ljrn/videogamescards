@@ -64,6 +64,7 @@ export default class GameThumbnail extends Component {
 					[
 						new Component(
 							'span',
+
 							{
 								name: 'class',
 								value: 'card-title activator grey-text text-darken-4',

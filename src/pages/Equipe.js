@@ -9,20 +9,22 @@ export default class Equipe extends Page {
 
 	constructor() {
 		super();
-		this.louis = new Person('Jeronimo', 'Louis', 'le boss', 'Fifa 21', '0');
+		this.louis = new Person('Jeronimo', 'Louis', 'le boss', 'Fifa 21', '0', '');
 		this.martin = new Person(
 			'Thibaut',
 			'Martin',
 			'Wili le roi',
 			'League of Legends',
-			'0'
+			'0',
+			''
 		);
 		this.baptiste = new Person(
 			'Momut',
 			'Baptiste',
 			'le boss too',
 			'CS-GO',
-			'0'
+			'0',
+			''
 		);
 	}
 
