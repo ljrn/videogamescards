@@ -26,7 +26,6 @@ export default class Router {
 		event.preventDefault();
 		Filters.resetSearch();
 		this.#menuElement.querySelector('#search').value = '';
-		this.changePage('/', new GameList());
 	};
 
 	static navigate(path, pushState = true) {

@@ -6,14 +6,24 @@ export default class Filters {
 		if (this.filters.find(f => f.name === filter.name))
 			this.filters.find(f => f.name === filter.name).value = filter.value;
 		else this.filters.push(filter);
+		localStorage.setItem('filters', this.exportFilters());
 	}
 
 	static resetFilters() {
 		this.filters = [];
+		localStorage.setItem('filters', this.exportFilters());
 	}
 
 	static resetSearch() {
 		this.filters = this.filters.filter(f => f.name != 'search');
+	}
+
+	static importFilters(filters) {
+		this.filters = JSON.parse(filters);
+	}
+
+	static exportFilters() {
+		return JSON.stringify(this.filters);
 	}
 
 	static toString() {

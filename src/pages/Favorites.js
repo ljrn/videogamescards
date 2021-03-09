@@ -19,5 +19,7 @@ export default class Favorites extends GameList {
 			this.children.push(new GameThumbnail(element));
 		});
 		this.element.innerHTML = this.render();
+		this.addFavorites(this.element);
+		this.redirectDetails(this.element);
 	}
 }

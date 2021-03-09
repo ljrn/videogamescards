@@ -29,6 +29,10 @@ games.innerHTML += new GameThumbnail({
 if (localStorage.getItem('favoris')) {
 	Favoris.setFavoris(JSON.parse(localStorage.getItem('favoris')));
 }
+
+if (localStorage.getItem('filters')) {
+	Filters.importFilters(localStorage.getItem('filters'));
+}
 //Filters.addFilter('search', localStorage.getItem('search'));
 
 const gameList = new GameList();
@@ -40,8 +44,7 @@ Router.titleElement = document.querySelector('.pageTitle');
 Router.contentElement = document.querySelector('.page');
 Router.menuElement = document.querySelector('.menu');
 Router.routes = [
-	{ path: '/', page: gameList, title: 'Jeux' },
-	{ path: '/search', page: searchList, title: 'Filtrer' },
+	{ path: '/', page: searchList, title: 'Jeux' },
 	{ path: '/lequipe.fr', page: equipeList, title: 'Equipe' },
 	{ path: '/mes-favoris', page: favorisList, title: 'Favoris' },
 ];
