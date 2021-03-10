@@ -9,39 +9,13 @@ export default class Equipe extends Page {
 
 	constructor() {
 		super();
-		/*this.louis = new Person(
-			'Jeronimo',
-			'Louis',
-			'le boss',
-			'Fifa 21',
-			'33',
-			'fifa-21'
-		);
-
-		this.martin = new Person(
-			'Thibaut',
-			'Martin',
-			'Wili le roi',
-			'League of Legends',
-			'33',
-			'league-of-legends'
-		);
-
-		this.baptiste = new Person(
-			'Momut',
-			'Baptiste',
-			'le boss too',
-			'CS-GO',
-			'33',
-			'counter-strike-global-offensive'
-		);*/
 	}
 
 	mount(element) {
 		super.mount(element);
-		this.children = [this.louis, this.martin, this.baptiste];
 		this.tagName = 'div';
 		this.attribute = null;
+		this.children = [this.louis, this.martin, this.baptiste];
 		this.element.innerHTML = this.render();
 		this.searchJeu();
 	}

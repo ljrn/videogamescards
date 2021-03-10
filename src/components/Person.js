@@ -14,7 +14,7 @@ export default class Person extends Component {
 					'div',
 					{
 						name: 'class',
-						value: 'card-content',
+						value: '',
 					},
 					[
 						new Component(
@@ -36,12 +36,12 @@ export default class Person extends Component {
 							'span',
 							{
 								name: 'class',
-								value: 'card-title activator grey-text text-darken-4',
+								value: '',
 							},
 							[
 								new Component('h1', {
 									name: 'class',
-									value: 'card-action',
+									value: 'card-title activator grey-text text-darken-4',
 								}),
 								new Component('h4', null, name),
 								new Component('h5', null, prenom + ' ' + nom),
