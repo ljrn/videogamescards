@@ -7,8 +7,6 @@ export default class FilteredGameList extends GameList {
 	}
 
 	getGames() {
-		console.log('filtered ' + Filters.toString());
-		console.log(Filters.filters);
 		fetch(
 			`https://api.rawg.io/api/games?metacritic=50,100&dates=2020,${new Date().getUTCFullYear()}&page=${
 				this.page_num
@@ -20,9 +18,7 @@ export default class FilteredGameList extends GameList {
 				else throw new Error(`Fetch error: ${response.status}`);
 			})
 			.then(responseJSON => {
-				console.log(this.page_num);
 				this.games = responseJSON;
-				console.log();
 				this.element.innerHTML = this.render();
 				this.addFavorites(this.element);
 				this.redirectDetails(this.element);
