@@ -8,12 +8,14 @@ import GameDetails from './GameDetails';
 export default class GameList extends Page {
 	#games;
 	page_num;
-	rendered;
+	rendered_pages_num;
+	rendered_games;
 	constructor() {
 		super('gameList');
-		this.games = [];
 		this.page_num = 1;
-		this.rendered = [];
+		this.rendered_pages_num = [];
+		this.rendered_games = [];
+		this.#games = [];
 	}
 
 	set games(value) {
@@ -25,6 +27,7 @@ export default class GameList extends Page {
 		}
 		this.#games = value.results;
 		if (this.#games) {
+			this.rendered_games.push(this.#games);
 			if (this.children instanceof Array)
 				this.#games.map(game => this.children.push(new GameThumbnail(game)));
 			else this.children = this.#games.map(game => new GameThumbnail(game));
@@ -32,7 +35,7 @@ export default class GameList extends Page {
 	}
 
 	resetPage() {
-		this.rendered = [];
+		this.rendered_pages_num = [];
 		this.page_num = 1;
 		super.resetPage();
 	}
@@ -70,8 +73,8 @@ export default class GameList extends Page {
 	}
 
 	mount(element) {
-		if (!this.rendered.includes(this.page_num)) {
-			this.rendered.push(this.page_num);
+		if (!this.rendered_pages_num.includes(this.page_num)) {
+			this.rendered_pages_num.push(this.page_num);
 			super.mount(element);
 			this.element.innerHTML += new Loader().render();
 			this.getGames();
@@ -86,8 +89,11 @@ export default class GameList extends Page {
 				console.log('fav');
 				e.preventDefault();
 				const name = element.querySelector('h4');
-				this.#games.forEach(game => {
-					if (game.name === name.innerHTML) Favoris.toggleFavoris(game, button);
+				this.rendered_games.forEach(games => {
+					games.forEach(game => {
+						if (game.name === name.innerHTML)
+							Favoris.toggleFavoris(game, button);
+					});
 				});
 			});
 		});

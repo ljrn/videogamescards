@@ -11,6 +11,7 @@ export default class Page extends Component {
 	}
 
 	resetPage() {
+		document.onscroll = null;
 		this.children = [];
 	}
 }
