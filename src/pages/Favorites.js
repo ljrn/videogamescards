@@ -1,8 +1,3 @@
-import Page from './Page';
-import GameThumbnail from '../components/GameThumbnail';
-import Loader from '../components/Loader';
-import Router from '../Router';
-import Filters from '../Filters';
 import GameList from './GameList';
 import Favoris from '../Favoris';
 
@@ -13,13 +8,9 @@ export default class Favorites extends GameList {
 
 	getGames() {
 		document.onscroll = null;
-		this.resetPage();
-		console.log(Favoris.getFavoris());
-		Favoris.getFavoris().forEach(element => {
-			this.children.push(new GameThumbnail(element));
-		});
+		this.games = { results: Favoris.getFavoris() };
 		this.element.innerHTML = this.render();
-		this.addFavorites(this.element);
 		this.redirectDetails(this.element);
+		this.addFavorites(this.element);
 	}
 }

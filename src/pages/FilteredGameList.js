@@ -6,14 +6,9 @@ export default class FilteredGameList extends GameList {
 		super();
 	}
 
-	resetPage() {
-		super.resetPage();
-	}
-
 	getGames() {
 		console.log('filtered ' + Filters.toString());
 		console.log(Filters.filters);
-		//this.resetPage();
 		fetch(
 			`https://api.rawg.io/api/games?metacritic=50,100&dates=2020,${new Date().getUTCFullYear()}&page=${
 				this.page_num

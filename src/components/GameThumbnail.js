@@ -1,3 +1,4 @@
+import Favoris from '../Favoris.js';
 import Component from './Component.js';
 import Img from './Img';
 import PlatformImg from './PlatformImg';
@@ -16,6 +17,9 @@ export default class GameThumbnail extends Component {
 			plat => new PlatformImg(plat.platform.name)
 		);
 
+		let star;
+		if (Favoris.isGameinFav({ name: name })) star = 'star';
+		else star = 'star_border';
 		//Permet un chargement nettement plus rapide
 		const background_image_cropped = `https://media.rawg.io/media/crop/600/400${
 			background_image.split('media')[2]
@@ -47,7 +51,7 @@ export default class GameThumbnail extends Component {
 								new Component(
 									'i',
 									{ name: 'class', value: 'material-icons' },
-									'star_border'
+									`${star}`
 								),
 							]
 						),

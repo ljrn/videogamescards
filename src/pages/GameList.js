@@ -32,9 +32,9 @@ export default class GameList extends Page {
 	}
 
 	resetPage() {
-		this.children = [];
 		this.rendered = [];
 		this.page_num = 1;
+		super.resetPage();
 	}
 
 	loadMore() {
@@ -69,10 +69,6 @@ export default class GameList extends Page {
 			});
 	}
 
-	getElement() {
-		return this.element;
-	}
-
 	mount(element) {
 		if (!this.rendered.includes(this.page_num)) {
 			this.rendered.push(this.page_num);
@@ -81,19 +77,24 @@ export default class GameList extends Page {
 			this.getGames();
 		}
 	}
+
 	addFavorites(elt) {
-		elt.querySelectorAll('.gameThumbnail').forEach(element => {
-			element.querySelector('.favbutton').addEventListener('click', e => {
+		const thumbs = document.querySelectorAll('.gameThumbnail');
+		thumbs.forEach(element => {
+			const button = element.querySelector('.favbutton');
+			button.addEventListener('click', e => {
+				console.log('fav');
 				e.preventDefault();
 				const name = element.querySelector('h4');
 				this.#games.forEach(game => {
-					if (game.name == name.innerHTML) Favoris.addFavoris(game);
+					if (game.name === name.innerHTML) Favoris.toggleFavoris(game, button);
 				});
 			});
 		});
 	}
+
 	redirectDetails(elt) {
-		elt.querySelectorAll('.gameThumbnail').forEach(element => {
+		document.querySelectorAll('.gameThumbnail').forEach(element => {
 			element.querySelector('.card-content').addEventListener('click', e => {
 				document.onscroll = null;
 				console.log(element.getAttribute('id'));

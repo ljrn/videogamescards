@@ -9,4 +9,8 @@ export default class Page extends Component {
 	mount(element) {
 		this.element = element;
 	}
+
+	resetPage() {
+		this.children = [];
+	}
 }
