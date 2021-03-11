@@ -35,6 +35,7 @@ export default class GameList extends Page {
 	}
 
 	resetPage() {
+		this.rendered_games = [];
 		this.rendered_pages_num = [];
 		this.page_num = 1;
 		super.resetPage();

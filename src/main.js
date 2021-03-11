@@ -86,8 +86,3 @@ genres.addEventListener('change', e => {
 	searchList.resetPage();
 	Router.changePage('/', searchList);
 });
-
-document.addEventListener('DOMContentLoaded', function () {
-	var elems = document.querySelectorAll('.carousel');
-	var instances = M.Carousel.init(elems, {});
-});
