@@ -30,6 +30,15 @@ export default class Router {
 	};
 
 	static navigate(path, pushState = true) {
+		if (path.includes('/detail-')) {
+			const gameDetails = new GameDetails(path.split('/detail-')[1]);
+			console.log(gameDetails);
+			this.routes.push({
+				path: `/detail-${path.split('/detail-')[1]}`,
+				page: gameDetails,
+				title: 'Details',
+			});
+		}
 		const route = this.routes.find(route => route.path === path);
 		const filterBox = this.#menuElement.querySelector('.filters');
 		if (route) {
@@ -43,15 +52,6 @@ export default class Router {
 			if (pushState) {
 				window.history.pushState(null, null, path);
 			}
-		} else if (path.includes('/detail-')) {
-			const gameDetails = new GameDetails(path.split('/detail-')[1]);
-			console.log(gameDetails);
-			this.routes.push({
-				path: `/detail-${path.split('/detail-')[1]}`,
-				page: gameDetails,
-				title: 'Details',
-			});
-			this.navigate(path);
 		}
 	}
 

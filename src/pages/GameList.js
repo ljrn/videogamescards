@@ -44,7 +44,7 @@ export default class GameList extends Page {
 	loadMore() {
 		if (
 			document.documentElement.scrollTop + window.innerHeight >=
-			document.documentElement.scrollHeight
+			document.documentElement.scrollHeight - 5
 		) {
 			document.documentElement.scrollTop =
 				document.documentElement.scrollTop - 5;
@@ -105,12 +105,16 @@ export default class GameList extends Page {
 			element.querySelector('.card-content').addEventListener('click', e => {
 				document.onscroll = null;
 				console.log(element.getAttribute('id'));
-				const gameDetails = new GameDetails(element.getAttribute('id'));
-				Router.routes.push({
-					path: `/detail-${element.getAttribute('id')}`,
-					page: gameDetails,
-					title: 'Details',
-				});
+				Router.navigate(`/detail-${element.getAttribute('id')}`);
+			});
+			element.querySelector('.card-content').addEventListener('click', e => {
+				document.onscroll = null;
+				console.log(element.getAttribute('id'));
+				Router.navigate(`/detail-${element.getAttribute('id')}`);
+			});
+			element.querySelector('img').addEventListener('click', e => {
+				document.onscroll = null;
+				console.log(element.getAttribute('id'));
 				Router.navigate(`/detail-${element.getAttribute('id')}`);
 			});
 		});

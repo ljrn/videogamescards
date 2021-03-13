@@ -20,10 +20,13 @@ export default class GameThumbnail extends Component {
 		let star;
 		if (Favoris.isGameinFav({ name: name })) star = 'star';
 		else star = 'star_border';
+
 		//Permet un chargement nettement plus rapide
-		const background_image_cropped = `https://media.rawg.io/media/crop/600/400${
-			background_image.split('media')[2]
-		}`;
+		if (background_image)
+			background_image = `https://media.rawg.io/media/crop/600/400${
+				background_image.split('media')[2]
+			}`;
+		else background_image = '/images/no_image_available.png';
 
 		super(
 			'div',
@@ -55,7 +58,7 @@ export default class GameThumbnail extends Component {
 								),
 							]
 						),
-						new Img(background_image_cropped),
+						new Img(background_image),
 					]
 				),
 

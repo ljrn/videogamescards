@@ -13,15 +13,11 @@ export default class Equipe extends Page {
 
 	mount(element) {
 		super.mount(element);
-		this.tagName = 'div';
-		this.attribute = null;
-		this.children = [this.louis, this.martin, this.baptiste];
-		this.element.innerHTML = this.render();
 		this.searchJeu();
 	}
 
 	searchJeu() {
-		fetch('https://api.rawg.io/api/games/fifa-21')
+		const promise1 = fetch('https://api.rawg.io/api/games/fifa-21')
 			.then(response => {
 				if (response.status == 200) return response.json();
 				else throw new Error(`Fetch error: ${response.status}`);
@@ -29,13 +25,14 @@ export default class Equipe extends Page {
 			.then(responseJSON => {
 				this.louis = new Person(responseJSON, 'Jeronimo', 'Louis', 'le boss');
 				this.children.push(this.louis);
-				this.element.innerHTML = this.render();
 			})
 			.catch(error => {
 				console.error(error);
 			});
 
-		fetch('https://api.rawg.io/api/games/counter-strike-global-offensive')
+		const promise2 = fetch(
+			'https://api.rawg.io/api/games/counter-strike-global-offensive'
+		)
 			.then(response => {
 				if (response.status == 200) return response.json();
 				else throw new Error(`Fetch error: ${response.status}`);
@@ -54,7 +51,7 @@ export default class Equipe extends Page {
 				console.error(error);
 			});
 
-		fetch('https://api.rawg.io/api/games/league-of-legends')
+		const promise3 = fetch('https://api.rawg.io/api/games/league-of-legends')
 			.then(response => {
 				if (response.status == 200) return response.json();
 				else throw new Error(`Fetch error: ${response.status}`);
@@ -67,10 +64,14 @@ export default class Equipe extends Page {
 					'Wili le roi'
 				);
 				this.children.push(this.martin);
-				this.element.innerHTML = this.render();
 			})
 			.catch(error => {
 				console.error(error);
 			});
+
+		// Attend la fin de toutes les promesses avant de render
+		Promise.all([promise1, promise2, promise3]).then(values => {
+			this.element.innerHTML = this.render();
+		});
 	}
 }
