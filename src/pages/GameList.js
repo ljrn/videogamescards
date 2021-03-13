@@ -3,7 +3,6 @@ import GameThumbnail from '../components/GameThumbnail';
 import Loader from '../components/Loader';
 import Router from '../Router';
 import Favoris from '../Favoris';
-import GameDetails from './GameDetails';
 
 export default class GameList extends Page {
 	#games;
@@ -102,11 +101,6 @@ export default class GameList extends Page {
 
 	redirectDetails(elt) {
 		document.querySelectorAll('.gameThumbnail').forEach(element => {
-			element.querySelector('.card-content').addEventListener('click', e => {
-				document.onscroll = null;
-				console.log(element.getAttribute('id'));
-				Router.navigate(`/detail-${element.getAttribute('id')}`);
-			});
 			element.querySelector('.card-content').addEventListener('click', e => {
 				document.onscroll = null;
 				console.log(element.getAttribute('id'));

@@ -1,31 +1,11 @@
-import GameThumbnail from './components/GameThumbnail';
 import GameList from './pages/GameList';
 import Router from './Router.js';
 import Filters from './Filters';
 import FilteredGameList from './pages/FilteredGameList';
 import Favorites from './pages/Favorites';
 import Favoris from './Favoris';
-import GameDetails from './pages/GameDetails';
-
 import Equipe from './pages/Equipe';
 
-const games = document.querySelector('.games');
-/*
-games.innerHTML += new GameThumbnail({
-	name: 'Grand Theft Auto V',
-	background_image:
-		'https://media.rawg.io/media/games/84d/84da2ac3fdfc6507807a1808595afb12.jpg',
-	released: '2013-09-17',
-	metacritic: '97',
-}).render();
-
-games.innerHTML += new GameThumbnail({
-	name: 'Rocket League',
-	background_image:
-		'https://media.rawg.io/media/games/88c/88c5b4d7c80276c03ff62aebb1a99ad4.jpg',
-	released: '2019-09-17T03:06:45',
-	metacritic: '97',
-}).render();*/
 if (localStorage.getItem('favoris')) {
 	Favoris.setFavoris(JSON.parse(localStorage.getItem('favoris')));
 }
@@ -48,13 +28,8 @@ Router.routes = [
 	{ path: '/lequipe.fr', page: equipeList, title: 'Equipe' },
 	{ path: '/mes-favoris', page: favorisList, title: 'Favoris' },
 ];
-//Router.navigate('/');
-// E.3. Deeplinking
-// détection des boutons précédent/suivant du navigateur :
-// on lit l'url courante dans la barre d'adresse et on l'envoie au Router
+
 window.onpopstate = () => Router.navigate(document.location.pathname, false);
-// affichage de la page initiale :
-// même traitement que lors de l'appui sur les boutons précédent/suivant
 window.onpopstate();
 
 const form = document.querySelector('form');
@@ -85,4 +60,12 @@ genres.addEventListener('change', e => {
 	console.log(Filters.filters);
 	searchList.resetPage();
 	Router.changePage('/', searchList);
+});
+
+Array.from(ordering.options).forEach(option => {
+	if (option.value == Filters.getOrdering()) option.selected = true;
+});
+
+Array.from(genres.options).forEach(option => {
+	if (option.value == Filters.getGenre()) option.selected = true;
 });

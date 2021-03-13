@@ -33,4 +33,12 @@ export default class Filters {
 		});
 		return string;
 	}
+
+	static getOrdering() {
+		return this.filters.find(f => 'ordering' === f.name).value;
+	}
+
+	static getGenre() {
+		return this.filters.find(f => 'genres' === f.name).value;
+	}
 }
