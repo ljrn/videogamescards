@@ -6,6 +6,7 @@ import Img from '../components/Img';
 import SliderCarousel from '../components/SliderCarousel';
 import FloatingFavButton from '../components/FloatingFavButton';
 import Favoris from '../Favoris.js';
+import Badge from '../components/Badge';
 
 export default class GameDetails extends Page {
 	chemin;
@@ -74,7 +75,7 @@ export default class GameDetails extends Page {
 				const genres = new Component(
 					'h4',
 					null,
-					responseJSON.genres.map(genre => `${genre.name} `)
+					responseJSON.genres.map(genre => new Badge(genre.name, ''))
 				);
 
 				const floatB = new FloatingFavButton(responseJSON.name);
