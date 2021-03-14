@@ -34,11 +34,17 @@ export default class GameDetails extends Page {
 					},
 					`${responseJSON.name}`
 				);
-				const background = new Img(
-					`https://media.rawg.io/media/crop/600/400${
-						responseJSON.background_image.split('media')[2]
-					}`
-				);
+
+				let background;
+				if (!responseJSON.background_image)
+					background = new Img('/images/no_image_available.png');
+				else
+					background = new Img(
+						`https://media.rawg.io/media/crop/600/400${
+							responseJSON.background_image.split('media')[2]
+						}`
+					);
+
 				const platform = new Component(
 					'div',
 					{ name: 'class', value: 'card-action' },
@@ -65,11 +71,18 @@ export default class GameDetails extends Page {
 					null,
 					`${responseJSON.description}`
 				);
+				const genres = new Component(
+					'h4',
+					null,
+					responseJSON.genres.map(genre => `${genre.name} `)
+				);
+
 				const floatB = new FloatingFavButton(responseJSON.name);
 				this.children.unshift(
 					name,
 					background,
 					platform,
+					genres,
 					released,
 					metacritic,
 					description,
