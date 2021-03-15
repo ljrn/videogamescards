@@ -46,6 +46,7 @@ export default class Person extends Component {
 								new Component('h4', null, name),
 								new Component('h5', null, prenom + ' ' + nom),
 								new Component('p', null, 'Alias : ' + surnom),
+								new Component('p', null, 'Note : 33%'),
 							]
 						),
 					]

@@ -8,7 +8,7 @@ export default class Equipe extends Page {
 	baptiste;
 
 	constructor() {
-		super();
+		super('gameList');
 	}
 
 	mount(element) {
