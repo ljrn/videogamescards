@@ -102,30 +102,6 @@ export default class GameDetails extends Page {
 				else throw new Error(`Fetch error: ${response.status}`);
 			})
 			.then(responseJSON => {
-				console.log(new Img(`${responseJSON.results[0].image}`));
-				/*const img = responseJSON.results.map(
-						res =>
-							new Component(
-								'a',
-								{
-									name: 'href',
-									value: `${res.image}`,
-								},
-								[
-									new Img(
-										`https://media.rawg.io/media/crop/600/400/screenshots${
-											res.image.split('screenshots')[1]
-										}`
-									),
-								]
-							)
-					);
-					const slider = new Component(
-						'div',
-						{ name: 'class', value: 'screenshots' },
-						img
-					);*/
-
 				const slider = new SliderCarousel(responseJSON.results);
 				this.children.push(slider);
 			})

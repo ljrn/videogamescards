@@ -42,6 +42,7 @@ export default class Favoris {
 
 	static resetFavoris() {
 		this.favoris = [];
+		localStorage.clear();
 	}
 
 	static setFavoris(favoris) {
