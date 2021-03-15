@@ -43,9 +43,9 @@ export default class Person extends Component {
 									name: 'class',
 									value: 'card-title activator grey-text text-darken-4',
 								}),
-								new Component('h4', null, name),
-								new Component('h5', null, prenom + ' ' + nom),
-								new Component('p', null, 'Alias : ' + surnom),
+								new Component('h4', null, prenom + ' ' + nom),
+								new Component('h5', null, 'Alias : ' + surnom),
+								new Component('p', null, `Jeu favoris: ${name}`),
 								new Component('p', null, 'Note : 33%'),
 							]
 						),

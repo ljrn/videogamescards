@@ -23,7 +23,7 @@ export default class Equipe extends Page {
 				else throw new Error(`Fetch error: ${response.status}`);
 			})
 			.then(responseJSON => {
-				this.louis = new Person(responseJSON, 'Jeronimo', 'Louis', 'le boss');
+				this.louis = new Person(responseJSON, 'Jeronimo', 'Louis', 'Le Boss');
 				this.children.push(this.louis);
 			})
 			.catch(error => {
@@ -42,7 +42,7 @@ export default class Equipe extends Page {
 					responseJSON,
 					'Momut',
 					'Baptiste',
-					'le boss too'
+					'Le Boss Too'
 				);
 				this.children.push(this.baptiste);
 				this.element.innerHTML = this.render();
@@ -61,7 +61,7 @@ export default class Equipe extends Page {
 					responseJSON,
 					'Thibaut',
 					'Martin',
-					'Wili le roi'
+					'Wili Le Roi'
 				);
 				this.children.push(this.martin);
 			})
