@@ -36,7 +36,14 @@ body {
 }
 
 #search{
+    width: 90% !important;
+    margin-left: 5% !important;
     text-indent: 17%;
+}
+
+label > h6{
+    margin-left: 5% !important;
+
 }
 
 .centered{
@@ -44,6 +51,8 @@ body {
 }
 
 select{
+    width: 90% !important;
+    margin-left: 5% !important;
     display: block !important;
 }
 
