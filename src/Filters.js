@@ -35,10 +35,14 @@ export default class Filters {
 	}
 
 	static getOrdering() {
-		return this.filters.find(f => 'ordering' === f.name).value;
+		const ordering = this.filters.find(f => 'ordering' === f.name);
+		if (ordering) return ordering.value;
+		else return '';
 	}
 
 	static getGenre() {
-		return this.filters.find(f => 'genres' === f.name).value;
+		const genre = this.filters.find?.(f => 'genres' === f.name);
+		if (genre) return genre.value;
+		else return '';
 	}
 }
