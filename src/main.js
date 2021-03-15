@@ -6,6 +6,17 @@ import Favorites from './pages/Favorites';
 import Favoris from './Favoris';
 import Equipe from './pages/Equipe';
 
+jQuery(function () {
+	$(function () {
+		$(window).scroll(function () {
+			if ($(this).scrollTop() > 200) {
+				$('#scrollUp').css('right', '10px');
+			} else {
+				$('#scrollUp').removeAttr('style');
+			}
+		});
+	});
+});
 if (localStorage.getItem('favoris')) {
 	Favoris.setFavoris(JSON.parse(localStorage.getItem('favoris')));
 }

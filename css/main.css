@@ -51,3 +51,11 @@ input[type="search"]:not(.browser-default){
     color: white ;
 }
 
+#scrollUp
+{
+position: fixed;
+top : 10px;
+right: -100px;
+opacity: 0.5;
+}
+
