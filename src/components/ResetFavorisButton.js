@@ -9,9 +9,11 @@ export default class ResetFavorisButton extends Component {
 				'a',
 				{ name: 'class', value: 'btn-floating btn-large black resetFavoris' },
 				[
-					new Component('i', { name: 'class', value: 'large material-icons' }, [
-						new Img('poubelle.png'),
-					]),
+					new Component(
+						'i',
+						{ name: 'class', value: 'large material-icons' },
+						'delete'
+					),
 				]
 			),
 		]);
