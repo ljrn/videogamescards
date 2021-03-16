@@ -59,7 +59,6 @@ form.addEventListener('submit', e => {
 ordering.addEventListener('change', e => {
 	e.preventDefault();
 	Filters.addFilter(ordering.id, ordering.value);
-	console.log(Filters.filters);
 	searchList.resetPage();
 	Router.changePage('/', searchList);
 });
@@ -67,7 +66,6 @@ ordering.addEventListener('change', e => {
 genres.addEventListener('change', e => {
 	e.preventDefault();
 	Filters.addFilter(genres.id, genres.value);
-	console.log(Filters.filters);
 	searchList.resetPage();
 	Router.changePage('/', searchList);
 });

@@ -3,7 +3,6 @@ export default class Favoris {
 
 	static toggleFavoris(game, button) {
 		const star = button.querySelector('i');
-		console.log(star);
 		if (this.isGameinFav(game)) {
 			this.removeFavoris(game);
 			star.innerHTML = 'star_border';
@@ -27,7 +26,6 @@ export default class Favoris {
 			id: game.id,
 			slug: game.slug,
 		});
-		console.log(this.favoris);
 		localStorage.setItem('favoris', JSON.stringify(this.favoris));
 	}
 

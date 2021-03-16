@@ -86,7 +86,6 @@ export default class GameList extends Page {
 		thumbs.forEach(element => {
 			const button = element.querySelector('.favbutton');
 			button.addEventListener('click', e => {
-				console.log('fav');
 				e.preventDefault();
 				const name = element.querySelector('h4');
 				this.rendered_games.forEach(games => {
@@ -103,12 +102,10 @@ export default class GameList extends Page {
 		document.querySelectorAll('.gameThumbnail').forEach(element => {
 			element.querySelector('.card-content').addEventListener('click', e => {
 				document.onscroll = null;
-				console.log(element.getAttribute('id'));
 				Router.navigate(`/detail-${element.getAttribute('id')}`);
 			});
 			element.querySelector('img').addEventListener('click', e => {
 				document.onscroll = null;
-				console.log(element.getAttribute('id'));
 				Router.navigate(`/detail-${element.getAttribute('id')}`);
 			});
 		});

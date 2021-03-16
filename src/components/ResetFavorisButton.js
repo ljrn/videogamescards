@@ -1,6 +1,4 @@
 import Component from './Component.js';
-import Favoris from '../Favoris.js';
-import Img from './Img.js';
 
 export default class ResetFavorisButton extends Component {
 	constructor() {

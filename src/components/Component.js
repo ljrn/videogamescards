@@ -42,8 +42,4 @@ export default class Component {
 		}
 		return this.children || '';
 	}
-
-	append(children) {
-		this.children.append(children);
-	}
 }

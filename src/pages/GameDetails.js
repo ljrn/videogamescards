@@ -111,7 +111,6 @@ export default class GameDetails extends Page {
 
 		// Attend la fin de toutes les promesses avant de render
 		Promise.all([promise1, promise2]).then(values => {
-			console.log(this.children);
 			this.element.innerHTML = this.render();
 			const elems = this.element.querySelectorAll('.carousel');
 			const instances = M.Carousel.init(elems, {
@@ -130,7 +129,6 @@ export default class GameDetails extends Page {
 	handleAddFavorites() {
 		const button = this.element.querySelector('.favbutton');
 		button.addEventListener('click', e => {
-			console.log('fav');
 			e.preventDefault();
 			Favoris.toggleFavoris(this.game, button);
 		});
