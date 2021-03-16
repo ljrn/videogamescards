@@ -53,9 +53,9 @@ export default class GameList extends Page {
 
 	getGames() {
 		fetch(
-			`https://api.rawg.io/api/games?metacritic=50,100&dates=2020,${new Date().getUTCFullYear()}&page=${
-				this.page_num
-			}`
+			`https://api.rawg.io/api/games?metacritic=50,100&dates=2020,${
+				new Date().getUTCFullYear() + 1
+			}&page=${this.page_num}`
 		)
 			.then(response => {
 				if (response.status == 200) return response.json();

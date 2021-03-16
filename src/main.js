@@ -6,17 +6,8 @@ import Favorites from './pages/Favorites';
 import Favoris from './Favoris';
 import Equipe from './pages/Equipe';
 
-jQuery(function () {
-	$(function () {
-		$(window).scroll(function () {
-			if ($(this).scrollTop() > 200) {
-				$('#scrollUp').css('right', '10px');
-			} else {
-				$('#scrollUp').removeAttr('style');
-			}
-		});
-	});
-});
+// Setup
+
 if (localStorage.getItem('favoris')) {
 	Favoris.setFavoris(JSON.parse(localStorage.getItem('favoris')));
 }
@@ -24,7 +15,6 @@ if (localStorage.getItem('favoris')) {
 if (localStorage.getItem('filters')) {
 	Filters.importFilters(localStorage.getItem('filters'));
 }
-//Filters.addFilter('search', localStorage.getItem('search'));
 
 const gameList = new GameList();
 const searchList = new FilteredGameList();
@@ -43,6 +33,19 @@ Router.routes = [
 window.onpopstate = () => Router.navigate(document.location.pathname, false);
 window.onpopstate();
 
+const genres = document.querySelector('#genres');
+const ordering = document.querySelector('#ordering');
+
+Array.from(ordering.options).forEach(option => {
+	if (option.value == Filters.getOrdering()) option.selected = true;
+});
+
+Array.from(genres.options).forEach(option => {
+	if (option.value == Filters.getGenre()) option.selected = true;
+});
+
+// Listeners
+
 const form = document.querySelector('form');
 
 form.addEventListener('submit', e => {
@@ -53,8 +56,6 @@ form.addEventListener('submit', e => {
 	Router.changePage('/', searchList);
 });
 
-const ordering = document.querySelector('#ordering');
-
 ordering.addEventListener('change', e => {
 	e.preventDefault();
 	Filters.addFilter(ordering.id, ordering.value);
@@ -62,8 +63,6 @@ ordering.addEventListener('change', e => {
 	searchList.resetPage();
 	Router.changePage('/', searchList);
 });
-
-const genres = document.querySelector('#genres');
 
 genres.addEventListener('change', e => {
 	e.preventDefault();
@@ -73,10 +72,8 @@ genres.addEventListener('change', e => {
 	Router.changePage('/', searchList);
 });
 
-Array.from(ordering.options).forEach(option => {
-	if (option.value == Filters.getOrdering()) option.selected = true;
-});
-
-Array.from(genres.options).forEach(option => {
-	if (option.value == Filters.getGenre()) option.selected = true;
-});
+const scrollUp = document.querySelector('#scrollUp');
+window.onscroll = function () {
+	if (document.documentElement.scrollTop > 200) scrollUp.style.right = '10px';
+	else scrollUp.removeAttribute('style');
+};
