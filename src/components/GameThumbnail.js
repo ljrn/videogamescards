@@ -1,98 +1,57 @@
 import Favoris from '../Favoris.js';
 import Component from './Component.js';
-import Img from './Img';
 import PlatformImg from './PlatformImg';
 
 export default class GameThumbnail extends Component {
-	constructor({
-		name,
-		background_image,
-		released,
-		metacritic,
-		parent_platforms,
-		id,
-		slug,
-	}) {
-		parent_platforms = parent_platforms.map(
-			plat => new PlatformImg(plat.platform.name)
+	name;
+	background_image;
+	released;
+	metacritic;
+	parent_platforms;
+	id;
+	slug;
+	star;
+	constructor(game) {
+		super();
+		this.name = game.name;
+		this.released = game.released;
+		this.metacritic = game.metacritic;
+		this.id = game.id;
+		this.slug = game.slug;
+
+		this.parent_platforms = game.parent_platforms.map(plat =>
+			new PlatformImg(plat.platform.name).render()
 		);
 
-		let star;
-		if (Favoris.isGameinFav({ name: name })) star = 'star';
-		else star = 'star_border';
+		if (Favoris.isGameinFav({ name: game.name })) this.star = 'star';
+		else this.star = 'star_border';
 
 		//Permet un chargement nettement plus rapide
-		if (background_image)
-			background_image = `https://media.rawg.io/media/crop/600/400${
-				background_image.split('media')[2]
+		if (game.background_image)
+			this.background_image = `https://media.rawg.io/media/crop/600/400${
+				game.background_image.split('media')[2]
 			}`;
-		else background_image = '/images/no_image_available.png';
+		else this.background_image = '/images/no_image_available.jpg';
+	}
 
-		super(
-			'div',
-			[
-				{ name: 'class', value: 'card gameThumbnail' },
-				{ name: 'id', value: `${slug}` },
-			],
-			[
-				new Component(
-					'div',
-					{
-						name: 'class',
-						value:
-							'card-image waves-effect waves-block waves-light games-image',
-					},
-					[
-						new Component(
-							'a',
-							{
-								name: 'class',
-								value:
-									'btn-floating halfway-fab waves-effect waves-light black favbutton',
-							},
-							[
-								new Component(
-									'i',
-									{ name: 'class', value: 'material-icons' },
-									`${star}`
-								),
-							]
-						),
-						new Img(background_image),
-					]
-				),
-
-				new Component(
-					'div',
-					{
-						name: 'class',
-						value: 'card-content',
-					},
-					[
-						new Component(
-							'span',
-
-							{
-								name: 'class',
-								value: 'card-title activator grey-text text-darken-4',
-							},
-							[
-								new Component('h4', null, name),
-								new Component('p', null, `Date de sortie: ${released}`),
-								new Component('p', null, `Note Metacritic: ${metacritic}`),
-							]
-						),
-					]
-				),
-				new Component(
-					'div',
-					{
-						name: 'class',
-						value: 'card-action',
-					},
-					parent_platforms
-				),
-			]
-		);
+	render() {
+		return `<div class='card gameThumbnail z-depth-3' id=${this.slug} >
+					<div class='card-image waves-effect waves-block waves-light games-image '>
+						<a class='btn-floating halfway-fab waves-effect waves-yellow black favbutton'>
+							<i class='material-icons'>${this.star}</i>
+						</a>
+						<img class='responsive-img' src='${this.background_image}' loading="lazy">
+					</div>
+					<div class='card-content'>
+						<span class='card-title activator grey-text text-darken-4'>
+							<h4 class="flow-text">${this.name}</h4>
+							<p class="flow-text">Date de sortie: ${this.released}</p>
+							<p class="flow-text">Note Metacritic: ${this.metacritic}</p>
+						</span>
+					</div>
+					<div class='card-action'>
+						${this.parent_platforms.join('')}
+					</div>
+		</div>`;
 	}
 }

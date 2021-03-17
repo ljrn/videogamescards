@@ -1,6 +1,6 @@
+import Loader from '../components/Loader';
 import Person from '../components/Person';
 import Page from '../pages/Page';
-import Component from '../components/Component';
 
 export default class Equipe extends Page {
 	louis;
@@ -11,20 +11,33 @@ export default class Equipe extends Page {
 		super('gameList');
 	}
 
+	render() {
+		return `<section class='gameList'>
+					${this.martin}
+					${this.louis}
+					${this.baptiste}
+				</section>`;
+	}
+
 	mount(element) {
 		super.mount(element);
 		this.searchJeu();
 	}
 
 	searchJeu() {
+		this.element.innerHTML = new Loader().render();
 		const promise1 = fetch('https://api.rawg.io/api/games/fifa-21')
 			.then(response => {
 				if (response.status == 200) return response.json();
 				else throw new Error(`Fetch error: ${response.status}`);
 			})
 			.then(responseJSON => {
-				this.louis = new Person(responseJSON, 'Jeronimo', 'Louis', 'Le Boss');
-				this.children.push(this.louis);
+				this.louis = new Person(
+					responseJSON,
+					'Jeronimo',
+					'Louis',
+					'Le Boss'
+				).render();
 			})
 			.catch(error => {
 				console.error(error);
@@ -43,9 +56,7 @@ export default class Equipe extends Page {
 					'Momut',
 					'Baptiste',
 					'Le Boss Too'
-				);
-				this.children.push(this.baptiste);
-				this.element.innerHTML = this.render();
+				).render();
 			})
 			.catch(error => {
 				console.error(error);
@@ -62,8 +73,7 @@ export default class Equipe extends Page {
 					'Thibaut',
 					'Martin',
 					'Wili Le Roi'
-				);
-				this.children.push(this.martin);
+				).render();
 			})
 			.catch(error => {
 				console.error(error);

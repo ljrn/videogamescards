@@ -1,57 +1,39 @@
 import Component from '../components/Component';
-import Img from './Img';
 
 export default class Person extends Component {
-	constructor({ name, background_image }, nom, prenom, surnom) {
-		super(
-			'div',
-			{
-				name: 'class',
-				value: 'card gameThumbnail',
-			},
-			[
-				new Component(
-					'div',
-					{
-						name: 'class',
-						value: '',
-					},
-					[
-						new Component(
-							'div',
-							{
-								name: 'class',
-								value:
-									'card-image waves-effect waves-block waves-light games-image',
-							},
-							[
-								new Img(
-									`https://media.rawg.io/media/crop/600/400${
-										background_image.split('media')[2]
-									}`
-								),
-							]
-						),
-						new Component(
-							'span',
-							{
-								name: 'class',
-								value: '',
-							},
-							[
-								new Component('h1', {
-									name: 'class',
-									value: 'card-title activator grey-text text-darken-4',
-								}),
-								new Component('h4', null, prenom + ' ' + nom),
-								new Component('h5', null, 'Alias : ' + surnom),
-								new Component('p', null, `Jeu favoris: ${name}`),
-								new Component('p', null, 'Note : 33%'),
-							]
-						),
-					]
-				),
-			]
-		);
+	nom;
+	prenom;
+	surnom;
+	game_name;
+	background_image;
+	constructor(game, nom, prenom, surnom) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.surnom = surnom;
+		this.game_name = game.name;
+		if (game.background_image)
+			this.background_image = `https://media.rawg.io/media/crop/600/400${
+				game.background_image.split('media')[2]
+			}`;
+		else this.background_image = '/images/no_image_available.jpg';
+	}
+
+	render() {
+		return `<div class="card gameThumbnail">
+					<div class="card-image">
+							<img src="${this.background_image}" loading="lazy">
+					</div>
+					<div class="card-content">
+						<span class="card-title grey-text text-darken-4">
+							<h4>${this.prenom} ${this.nom}</h4>
+							<h5>Alias : ${this.surnom}</h5>
+							<p>Jeu favoris: ${this.game_name}</p>
+						</span>
+					</div>
+					<div class="card-action">
+						<h6>Note : 33%</h6>
+					</div>
+				</div>`;
 	}
 }

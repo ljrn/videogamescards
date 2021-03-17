@@ -1,18 +1,23 @@
 import Component from './Component.js';
 import Img from './Img.js';
 export default class SliderCarousel extends Component {
+	items;
 	constructor(images) {
-		const imgMap = images.map(
+		super();
+		if (images.length == 0)
+			images = [{ image: '/images/no_image_available.jpg' }];
+
+		this.items = images.map(
 			img =>
-				new Component(
-					'a',
-					[
-						{ name: 'class', value: 'carousel-item' },
-						{ name: 'href', value: `${img.image}` },
-					],
-					[new Img(`${img.image}`)]
-				)
+				`<a class='carousel-item' href='${img.image}'>
+				${new Img(`${img.image}`).render()}
+				`
 		);
-		super('div', { name: 'class', value: 'carousel carousel-slider' }, imgMap);
+	}
+
+	render() {
+		return `<div class='carousel carousel-slider'>
+					${this.items.join('')}
+				</div>`;
 	}
 }

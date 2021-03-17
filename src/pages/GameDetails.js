@@ -2,7 +2,6 @@ import Page from './Page';
 import Loader from '../components/Loader';
 import Component from '../components/Component';
 import PlatformImg from '../components/PlatformImg';
-import Img from '../components/Img';
 import SliderCarousel from '../components/SliderCarousel';
 import FloatingFavButton from '../components/FloatingFavButton';
 import Favoris from '../Favoris.js';
@@ -11,9 +10,32 @@ import Badge from '../components/Badge';
 export default class GameDetails extends Page {
 	chemin;
 	game;
+	slider;
+	parent_platforms;
+	resized_image;
 	constructor(chemin) {
 		super('detail');
 		this.chemin = chemin;
+		this.game = {};
+	}
+
+	render() {
+		return `
+		<div class="parallax-container">
+				<div class="parallax"><img src="${this.resized_image}"></div>
+	  		</div>
+		<section class="detail">
+			<h1 class="">${this.game.name}</h1>
+			${this.parent_platforms}
+			${this.game.genres}
+			<h2 class="">Released: ${this.game.released}</h2>
+			<h3 class="">Note Metacritic: ${this.game.metacritic}</h3>
+			<p></p>
+			${this.game.description}
+			${this.game.favButton}
+			${this.slider}
+		</section>
+		`;
 	}
 
 	getInfos() {
@@ -24,71 +46,36 @@ export default class GameDetails extends Page {
 			})
 			.then(responseJSON => {
 				this.game = responseJSON;
-				const parent_platforms = responseJSON.parent_platforms.map(
+				this.parent_platforms = this.game.parent_platforms.map(
 					plat => new PlatformImg(plat.platform.name)
 				);
-				const name = new Component(
-					'h1',
-					{
-						name: 'class',
-						value: '',
-					},
-					`${responseJSON.name}`
-				);
 
-				let background;
-				if (!responseJSON.background_image)
-					background = new Img('/images/no_image_available.png');
+				if (!this.game.background_image)
+					this.resized_image = '/images/no_image_available.jpg';
 				else
-					background = new Img(
-						`https://media.rawg.io/media/crop/600/400${
-							responseJSON.background_image.split('media')[2]
-						}`
-					);
+					this.resized_image = `https://media.rawg.io/media/resize/1280/-${
+						this.game.background_image.split('media')[2]
+					}`;
 
-				const platform = new Component(
+				this.parent_platforms = new Component(
 					'div',
-					{ name: 'class', value: 'card-action' },
-					parent_platforms
-				);
-				const released = new Component(
-					'h2',
-					{
-						name: 'class',
-						value: '',
-					},
-					`Released: ${responseJSON.released}`
-				);
-				const metacritic = new Component(
-					'h3',
-					{
-						name: 'class',
-						value: '',
-					},
-					`Note Metacritic: ${responseJSON.metacritic}`
-				);
-				const description = new Component(
+					{ name: 'class', value: 'card-action platform-detail' },
+					this.parent_platforms
+				).render();
+
+				this.game.description = new Component(
 					'p',
 					null,
-					`${responseJSON.description}`
-				);
-				const genres = new Component(
+					this.game.description
+				).render();
+
+				this.game.genres = new Component(
 					'h4',
 					null,
-					responseJSON.genres.map(genre => new Badge(genre.name, ''))
-				);
+					this.game.genres.map(genre => new Badge(genre.name, ''))
+				).render();
 
-				const floatB = new FloatingFavButton(responseJSON.name);
-				this.children.unshift(
-					name,
-					background,
-					platform,
-					genres,
-					released,
-					metacritic,
-					description,
-					floatB
-				);
+				this.game.favButton = new FloatingFavButton(this.game.name).render();
 			})
 			.catch(error => {
 				console.error(error);
@@ -102,8 +89,7 @@ export default class GameDetails extends Page {
 				else throw new Error(`Fetch error: ${response.status}`);
 			})
 			.then(responseJSON => {
-				const slider = new SliderCarousel(responseJSON.results);
-				this.children.push(slider);
+				this.slider = new SliderCarousel(responseJSON.results).render();
 			})
 			.catch(error => {
 				console.error(error);
@@ -112,14 +98,24 @@ export default class GameDetails extends Page {
 		// Attend la fin de toutes les promesses avant de render
 		Promise.all([promise1, promise2]).then(values => {
 			this.element.innerHTML = this.render();
+
 			const elems = this.element.querySelectorAll('.carousel');
 			const instances = M.Carousel.init(elems, {
 				fullWidth: true,
 				indicators: true,
 			});
+
+			const parallax = document.querySelectorAll('.parallax');
+			const pInstances = M.Parallax.init(parallax, {});
+
+			M.toast({
+				html: `Si le jeu vous plait n'hésitez pas à l'ajouter dans vos favoris !`,
+				displayLength: 2000,
+			});
 			this.handleAddFavorites();
 		});
 	}
+
 	mount(element) {
 		super.mount(element);
 		this.element.innerHTML = new Loader().render();

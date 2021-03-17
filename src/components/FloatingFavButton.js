@@ -2,22 +2,18 @@ import Component from './Component.js';
 import Favoris from '../Favoris.js';
 
 export default class FloatingFavButton extends Component {
+	star;
 	constructor(name) {
-		let star;
-		if (Favoris.isGameinFav({ name: name })) star = 'star';
-		else star = 'star_border';
-		super('div', { name: 'class', value: 'fixed-action-btn' }, [
-			new Component(
-				'a',
-				{ name: 'class', value: 'btn-floating btn-large black favbutton' },
-				[
-					new Component(
-						'i',
-						{ name: 'class', value: 'large material-icons' },
-						star
-					),
-				]
-			),
-		]);
+		super();
+		if (Favoris.isGameinFav({ name: name })) this.star = 'star';
+		else this.star = 'star_border';
+	}
+
+	render() {
+		return `<div class="fixed-action-btn">
+					<a class="btn-floating btn-large black favbutton pulse waves-effect waves-yellow">
+						<i class="large material-icons">${this.star}</i>
+					</a>
+				</div>`;
 	}
 }

@@ -1,31 +1,22 @@
 import Component from './Component.js';
 export default class Loader extends Component {
 	constructor() {
-		super('div', { name: 'class', value: 'preloader-wrapper big active' }, [
-			new Component(
-				'div',
-				{ name: 'class', value: 'spinner-layer spinner-blue-only' },
-				[
-					new Component(
-						'div',
-						{ name: 'class', value: 'circle-clipper left' },
-						[new Component('div', { name: 'class', value: 'circle' }, ' ')]
-					),
+		super();
+	}
 
-					new Component('div', { name: 'class', value: 'gap-patch' }, [
-						new Component('div', { name: 'class', value: 'circle' }, ' '),
-					]),
-
-					new Component(
-						'div',
-						{
-							name: 'class',
-							value: 'circle-clipper right',
-						},
-						[new Component('div', { name: 'class', value: 'circle' }, ' ')]
-					),
-				]
-			),
-		]);
+	render() {
+		return `<div class="preloader-wrapper big active">
+					<div class="spinner-layer spinner-blue-only">
+						<div class="circle-clipper left">
+							<div class="circle"> </div>
+						</div>
+						<div class="gap-patch">
+							<div class="circle"> </div>
+						</div>
+						<div class="circle-clipper right">
+							<div class="circle"> </div>
+						</div>
+					</div>
+				</div>`;
 	}
 }

@@ -15,6 +15,7 @@ export default class Favorites extends GameList {
 		this.element.innerHTML = this.render();
 		this.redirectDetails(this.element);
 		this.addFavorites(this.element);
+
 		this.handleResetFavorites();
 	}
 	handleResetFavorites() {

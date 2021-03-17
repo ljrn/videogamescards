@@ -1,9 +1,12 @@
 import Component from './Component.js';
 export default class Img extends Component {
+	url;
 	constructor(url) {
-		super('img', [
-			{ name: 'src', value: url },
-			{ name: 'loading', value: 'lazy' },
-		]);
+		super();
+		this.url = url;
+	}
+
+	render() {
+		return `<img src='${this.url}' loading="lazy">`;
 	}
 }

@@ -1,0 +1,12 @@
+.platform-detail{
+    width: 50%;
+}
+
+.parallax-container {
+    height: 400px !important;
+  }
+
+.detail > p{
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
