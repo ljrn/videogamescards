@@ -1,10 +1,10 @@
 ## Projet 2021 Thibaut-Jeronimo-Momut <!-- omit in toc -->
 
-- [A. Lancement de l'application](#a-lancement-de-l'application)
+- [A. Lancement du projet](#a-lancement-du-projet)
 - [B. Captures Écrans](#b-captures-écrans)
 - [C. Correction ](#c-correction)
 
-## A. Landement de l'application
+## A. Landement du projet
 
 Pour lancer l'application, il faut faire les instructions suivantes : 
 ```
