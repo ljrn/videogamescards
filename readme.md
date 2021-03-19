@@ -4,7 +4,7 @@
 - [B. Captures Écrans](#b-captures-écrans)
 - [C. Correction ](#c-correction)
 
-## A. Landement du projet
+## A. Lancement du projet
 
 Pour lancer l'application, il faut faire les instructions suivantes : 
 ```
