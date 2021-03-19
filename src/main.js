@@ -71,6 +71,12 @@ genres.addEventListener('change', e => {
 });
 
 const scrollUp = document.querySelector('#scrollUp');
+
+scrollUp.addEventListener('click', e => {
+	e.preventDefault();
+	document.documentElement.scrollTop = 0;
+});
+
 window.onscroll = function () {
 	if (document.documentElement.scrollTop > 200) scrollUp.style.right = '10px';
 	else scrollUp.removeAttribute('style');

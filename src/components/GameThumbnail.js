@@ -52,6 +52,6 @@ export default class GameThumbnail extends Component {
 					<div class='card-action'>
 						${this.parent_platforms.join('')}
 					</div>
-		</div>`;
+				</div>`;
 	}
 }

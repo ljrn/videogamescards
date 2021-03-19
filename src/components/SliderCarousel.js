@@ -10,7 +10,8 @@ export default class SliderCarousel extends Component {
 		this.items = images.map(
 			img =>
 				`<a class='carousel-item' href='${img.image}'>
-				${new Img(`${img.image}`).render()}
+					 <img src='${img.image}'>
+				</a>	 
 				`
 		);
 	}

@@ -6,6 +6,7 @@ import SliderCarousel from '../components/SliderCarousel';
 import FloatingFavButton from '../components/FloatingFavButton';
 import Favoris from '../Favoris.js';
 import Badge from '../components/Badge';
+import Img from '../components/Img';
 
 export default class GameDetails extends Page {
 	chemin;
@@ -22,8 +23,8 @@ export default class GameDetails extends Page {
 	render() {
 		return `
 		<div class="parallax-container">
-				<div class="parallax"><img src="${this.resized_image}"></div>
-	  		</div>
+			<div class="parallax"><img src="${this.resized_image}"></div>
+	  	</div>
 		<section class="detail">
 			<h1 class="">${this.game.name}</h1>
 			${this.parent_platforms}
@@ -39,7 +40,9 @@ export default class GameDetails extends Page {
 	}
 
 	getInfos() {
-		const promise1 = fetch(`https://api.rawg.io/api/games/${this.chemin}?key=6b30690e274446c997ad25f8f19e1215`)
+		const promise1 = fetch(
+			`https://api.rawg.io/api/games/${this.chemin}?key=6b30690e274446c997ad25f8f19e1215`
+		)
 			.then(response => {
 				if (response.status == 200) return response.json();
 				else throw new Error(`Fetch error: ${response.status}`);
@@ -76,6 +79,7 @@ export default class GameDetails extends Page {
 				).render();
 
 				this.game.favButton = new FloatingFavButton(this.game.name).render();
+				return responseJSON;
 			})
 			.catch(error => {
 				console.error(error);
@@ -97,22 +101,27 @@ export default class GameDetails extends Page {
 
 		// Attend la fin de toutes les promesses avant de render
 		Promise.all([promise1, promise2]).then(values => {
-			this.element.innerHTML = this.render();
+			if (values[0]) {
+				this.element.innerHTML = this.render();
 
-			const elems = this.element.querySelectorAll('.carousel');
-			const instances = M.Carousel.init(elems, {
-				fullWidth: true,
-				indicators: true,
-			});
+				const carousel = this.element.querySelector('.carousel');
+				const instances = M.Carousel.init(carousel, {
+					fullWidth: true,
+					indicators: true,
+				});
 
-			const parallax = document.querySelectorAll('.parallax');
-			const pInstances = M.Parallax.init(parallax, {});
+				const parallax = document.querySelector('.parallax');
+				const pInstances = M.Parallax.init(parallax, {
+					responsiveThreshold: 0,
+				});
 
-			M.toast({
-				html: `Si le jeu vous plait n'hésitez pas à l'ajouter dans vos favoris !`,
-				displayLength: 2000,
-			});
-			this.handleAddFavorites();
+				M.toast({
+					html: `Si le jeu vous plait n'hésitez pas à l'ajouter dans vos favoris !`,
+					displayLength: 2000,
+				});
+				this.handleAddFavorites();
+			} else
+				this.element.innerHTML = `<img class='not_found' src='/images/404.png'>`;
 		});
 	}
 
