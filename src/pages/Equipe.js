@@ -55,7 +55,7 @@ export default class Equipe extends Page {
 					responseJSON,
 					'Momut',
 					'Baptiste',
-					'Le Boss Too'
+					'Croustibapt'
 				).render();
 			})
 			.catch(error => {
