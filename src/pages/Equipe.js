@@ -26,7 +26,7 @@ export default class Equipe extends Page {
 
 	searchJeu() {
 		this.element.innerHTML = new Loader().render();
-		const promise1 = fetch('https://api.rawg.io/api/games/fifa-21')
+		const promise1 = fetch('https://api.rawg.io/api/games/fifa-21?key=6b30690e274446c997ad25f8f19e1215')
 			.then(response => {
 				if (response.status == 200) return response.json();
 				else throw new Error(`Fetch error: ${response.status}`);
@@ -44,7 +44,7 @@ export default class Equipe extends Page {
 			});
 
 		const promise2 = fetch(
-			'https://api.rawg.io/api/games/counter-strike-global-offensive'
+			'https://api.rawg.io/api/games/counter-strike-global-offensive?key=6b30690e274446c997ad25f8f19e1215'
 		)
 			.then(response => {
 				if (response.status == 200) return response.json();
@@ -62,7 +62,7 @@ export default class Equipe extends Page {
 				console.error(error);
 			});
 
-		const promise3 = fetch('https://api.rawg.io/api/games/league-of-legends')
+		const promise3 = fetch('https://api.rawg.io/api/games/league-of-legends?key=6b30690e274446c997ad25f8f19e1215')
 			.then(response => {
 				if (response.status == 200) return response.json();
 				else throw new Error(`Fetch error: ${response.status}`);

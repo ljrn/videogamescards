@@ -8,7 +8,7 @@ export default class FilteredGameList extends GameList {
 
 	getGames() {
 		fetch(
-			`https://api.rawg.io/api/games?metacritic=50,100&dates=2020,${
+			`https://api.rawg.io/api/games?key=6b30690e274446c997ad25f8f19e1215&metacritic=50,100&dates=2020,${
 				new Date().getUTCFullYear() + 1
 			}&page=${this.page_num}
 			${Filters.toString()}`

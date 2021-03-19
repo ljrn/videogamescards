@@ -39,7 +39,7 @@ export default class GameDetails extends Page {
 	}
 
 	getInfos() {
-		const promise1 = fetch(`https://api.rawg.io/api/games/${this.chemin}`)
+		const promise1 = fetch(`https://api.rawg.io/api/games/${this.chemin}?key=6b30690e274446c997ad25f8f19e1215`)
 			.then(response => {
 				if (response.status == 200) return response.json();
 				else throw new Error(`Fetch error: ${response.status}`);
@@ -82,7 +82,7 @@ export default class GameDetails extends Page {
 			});
 
 		const promise2 = fetch(
-			`https://api.rawg.io/api/games/${this.chemin}/screenshots?page_size=30`
+			`https://api.rawg.io/api/games/${this.chemin}/screenshots?key=6b30690e274446c997ad25f8f19e1215&page_size=30`
 		)
 			.then(response => {
 				if (response.status == 200) return response.json();
