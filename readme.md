@@ -24,7 +24,7 @@ Dans un navigateur :
 
 
 **Page de détails d'un jeu :**
-<img src="./images/Détails.png">
+<img src="./images/Details.png">
 
 
 **Page de favoris :**
