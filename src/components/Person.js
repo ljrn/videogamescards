@@ -28,12 +28,12 @@ export default class Person extends Component {
 					<div class="card-content">
 						<span class="card-title grey-text text-darken-4">
 							<h4>${this.prenom} ${this.nom}</h4>
-							<h5>Alias : ${this.surnom}</h5>
-							<p>Jeu favoris: ${this.game_name}</p>
+							<p>Alias : <b>${this.surnom}</b></p>
+							<p>Jeu favori : <b>${this.game_name}</b></p>
 						</span>
 					</div>
 					<div class="card-action">
-						<h6>Note : 33%</h6>
+						<h6>Note : <b>33%</b></h6>
 					</div>
 				</div>`;
 	}
