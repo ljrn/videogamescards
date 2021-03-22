@@ -1,0 +1,8 @@
+.equipeThumbnail {
+	display: flex;
+    flex-direction: column;
+    margin-right: 1% !important;
+    margin-left: 1% !important;
+	width: 30%;
+
+}      
