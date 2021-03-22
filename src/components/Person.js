@@ -6,17 +6,18 @@ export default class Person extends Component {
 	surnom;
 	game_name;
 	background_image;
-	constructor(game, nom, prenom, surnom) {
+	constructor(game_name, background_image, nom, prenom, surnom) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.surnom = surnom;
-		this.game_name = game.name;
-		if (game.background_image)
+		this.game_name = game_name;
+		this.background_image = background_image;
+		/*if (game.background_image)
 			this.background_image = `https://media.rawg.io/media/crop/600/400${
 				game.background_image.split('media')[2]
 			}`;
-		else this.background_image = '/images/no_image_available.jpg';
+		else this.background_image = '/images/no_image_available.jpg';*/
 	}
 
 	render() {
