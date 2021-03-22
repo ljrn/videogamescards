@@ -21,7 +21,7 @@ export default class Person extends Component {
 	}
 
 	render() {
-		return `<div class="card equipeThumbnail">
+		return `<div class="card equipeThumbnail z-depth-3">
 					<div class="card-image">
 							<img src="${this.background_image}" loading="lazy">
 					</div>
