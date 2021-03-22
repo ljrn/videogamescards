@@ -18,6 +18,8 @@ export default class Favorites extends GameList {
 
 		this.handleResetFavorites();
 	}
+
+	// gère le bouton "poubelle"
 	handleResetFavorites() {
 		const button = this.element.querySelector('.resetFavoris');
 		button.addEventListener('click', e => {

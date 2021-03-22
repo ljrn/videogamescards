@@ -1,4 +1,3 @@
-import Loader from '../components/Loader';
 import Person from '../components/Person';
 import Page from '../pages/Page';
 
@@ -24,6 +23,7 @@ export default class Equipe extends Page {
 		this.initEquipe();
 	}
 
+	// Initialise et render les components asociés aux personnes présentes dans l'équipe
 	initEquipe() {
 		this.louis = new Person(
 			'FIFA 21',
@@ -52,7 +52,9 @@ export default class Equipe extends Page {
 		this.element.innerHTML = this.render();
 	}
 
-	/*searchJeu() {
+	/*  Version plus "dynamique"
+	
+	searchJeu() {
 		this.element.innerHTML = new Loader().render();
 		const promise1 = fetch(
 			'https://api.rawg.io/api/games/fifa-21?key=6b30690e274446c997ad25f8f19e1215'

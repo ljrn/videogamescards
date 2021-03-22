@@ -9,7 +9,7 @@ import Equipe from './pages/Equipe';
 // Setup
 
 if (localStorage.getItem('favoris')) {
-	Favoris.setFavoris(JSON.parse(localStorage.getItem('favoris')));
+	Favoris.importFavoris(localStorage.getItem('favoris'));
 }
 
 if (localStorage.getItem('filters')) {

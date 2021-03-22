@@ -17,6 +17,16 @@ export default class GameList extends Page {
 		this.#games = [];
 	}
 
+	mount(element) {
+		if (!this.rendered_pages_num.includes(this.page_num)) {
+			this.rendered_pages_num.push(this.page_num);
+			super.mount(element);
+			this.element.innerHTML += new Loader().render();
+			this.getGames();
+		}
+	}
+
+	// Traite les infos recup sur l'api
 	set games(value) {
 		if (value.next == null) {
 			document.onscroll = null;
@@ -33,6 +43,7 @@ export default class GameList extends Page {
 		}
 	}
 
+	// Reset la page
 	resetPage() {
 		this.rendered_games = [];
 		this.rendered_pages_num = [];
@@ -40,6 +51,7 @@ export default class GameList extends Page {
 		super.resetPage();
 	}
 
+	// Permet le chargement de plus de jeux au scroll
 	loadMore() {
 		if (
 			document.documentElement.scrollTop + window.innerHeight >=
@@ -51,6 +63,7 @@ export default class GameList extends Page {
 		}
 	}
 
+	// Recupere la page de jeux sur l'api, render la page et initialise les listeners
 	getGames() {
 		fetch(
 			`https://api.rawg.io/api/games?key=6b30690e274446c997ad25f8f19e1215&metacritic=50,100&dates=2020,${
@@ -72,15 +85,7 @@ export default class GameList extends Page {
 			});
 	}
 
-	mount(element) {
-		if (!this.rendered_pages_num.includes(this.page_num)) {
-			this.rendered_pages_num.push(this.page_num);
-			super.mount(element);
-			this.element.innerHTML += new Loader().render();
-			this.getGames();
-		}
-	}
-
+	// Listener ajout fav
 	addFavorites(elt) {
 		const thumbs = document.querySelectorAll('.gameThumbnail');
 		thumbs.forEach(element => {
@@ -98,6 +103,7 @@ export default class GameList extends Page {
 		});
 	}
 
+	// Listener redirection detail du jeu
 	redirectDetails(elt) {
 		document.querySelectorAll('.gameThumbnail').forEach(element => {
 			element.querySelector('.card-content').addEventListener('click', e => {

@@ -6,7 +6,6 @@ import SliderCarousel from '../components/SliderCarousel';
 import FloatingFavButton from '../components/FloatingFavButton';
 import Favoris from '../Favoris.js';
 import Badge from '../components/Badge';
-import Img from '../components/Img';
 
 export default class GameDetails extends Page {
 	chemin;
@@ -39,6 +38,7 @@ export default class GameDetails extends Page {
 		`;
 	}
 
+	// Recupere et traite les informations du jeu recup sur l'api
 	getInfos() {
 		const promise1 = fetch(
 			`https://api.rawg.io/api/games/${this.chemin}?key=6b30690e274446c997ad25f8f19e1215`
@@ -101,26 +101,33 @@ export default class GameDetails extends Page {
 
 		// Attend la fin de toutes les promesses avant de render
 		Promise.all([promise1, promise2]).then(values => {
+			// Si le jeu est présent on render
 			if (values[0]) {
 				this.element.innerHTML = this.render();
 
+				// init carousel
 				const carousel = this.element.querySelector('.carousel');
 				const instances = M.Carousel.init(carousel, {
 					fullWidth: true,
 					indicators: true,
 				});
 
+				// init parallax
 				const parallax = document.querySelector('.parallax');
 				const pInstances = M.Parallax.init(parallax, {
 					responsiveThreshold: 0,
 				});
 
+				// Push toast
 				M.toast({
 					html: `Si le jeu vous plait n'hésitez pas à l'ajouter dans vos favoris !`,
 					displayLength: 2000,
 				});
+
 				this.handleAddFavorites();
-			} else
+			}
+			// Sinon page 404
+			else
 				this.element.innerHTML = `<img class='not_found' src='/images/404.png'>`;
 		});
 	}
@@ -131,6 +138,7 @@ export default class GameDetails extends Page {
 		this.getInfos();
 	}
 
+	// Gère le click sur le boutton favoris
 	handleAddFavorites() {
 		const button = this.element.querySelector('.favbutton');
 		button.addEventListener('click', e => {

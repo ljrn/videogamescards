@@ -1,11 +1,12 @@
 import Filters from './Filters';
-import GameList from './pages/GameList';
 import GameDetails from './pages/GameDetails';
 
 export default class Router {
 	static titleElement;
 	static contentElement;
 	static #menuElement;
+
+	static routes = [];
 
 	static set menuElement(element) {
 		this.#menuElement = element;
@@ -19,13 +20,16 @@ export default class Router {
 		event.preventDefault();
 		if (event.target.getAttribute('id') === 'reset') {
 			Filters.resetFilters();
-			this.changePage('/', new GameList());
+			this.#menuElement.querySelector('#ordering').selectedIndex = 0;
+			this.#menuElement.querySelector('#genres').selectedIndex = 0;
+			this.navigate('/');
 		} else this.navigate(event.target.getAttribute('href'));
 	};
 
 	static handleCancelSearch = event => {
 		event.preventDefault();
 		Filters.resetSearch();
+		this.navigate('/');
 		this.#menuElement.querySelector('#search').value = '';
 	};
 
