@@ -2,7 +2,6 @@
 
 - [A. Lancement du projet](#a-lancement-du-projet)
 - [B. Captures Écrans](#b-captures-écrans)
-- [C. Correction ](#c-correction)
 
 ## A. Lancement du projet
 
