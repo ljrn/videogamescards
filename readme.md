@@ -33,7 +33,3 @@ Dans un navigateur :
 
 **Page de l'équipe :**
 <img src="./images/Equipe.png">
-
-## C. Correction
-
-<img src="https://j.gifs.com/L7LxJD.gif">
